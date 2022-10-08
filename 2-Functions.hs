@@ -108,20 +108,20 @@ fib n
     -- | otherwise = fib (n - 1) + fib (n - 2)
 -- Dynamic programming definition (O(n))
     | otherwise = fib' (n - 1) 1 0
-
-fib' :: Int -> Int -> Int -> Int
-fib' numCalls curr prev 
-    | numCalls == 0 = curr
-    | otherwise     = fib' (numCalls - 1) (curr + prev) curr
+    where
+        fib' :: Int -> Int -> Int -> Int
+        fib' numCalls curr prev 
+            | numCalls == 0 = curr
+            | otherwise     = fib' (numCalls - 1) (curr + prev) curr
 
 -- Q16
 goldenRatio :: Float -> Float 
 goldenRatio threshold
     = goldenRatio' threshold 2 1 1
-
-goldenRatio' :: Float -> Int -> Int -> Float -> Float
-goldenRatio' threshold currFib prevFib prevRatio
-    | abs (currRatio - prevRatio) < threshold = currRatio
-    | otherwise                               = goldenRatio' threshold (currFib + prevFib) currFib currRatio
-    where   
-        currRatio = fromIntegral currFib / fromIntegral prevFib
+    where
+        goldenRatio' :: Float -> Int -> Int -> Float -> Float
+        goldenRatio' threshold currFib prevFib prevRatio
+            | abs (currRatio - prevRatio) < threshold = currRatio
+            | otherwise                               = goldenRatio' threshold (currFib + prevFib) currFib currRatio
+            where   
+                currRatio = fromIntegral currFib / fromIntegral prevFib
