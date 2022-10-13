@@ -13,13 +13,12 @@ distance (x1, y1) (x2, y2) = sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
 
 -- Q4
 triangleArea :: Vertex -> Vertex -> Vertex -> Float
-triangleArea vertex1 vertex2 vertex3
-  = sqrt(s * (s - a) * (s - b) * (s - c))
-    where
-      s = (a + b + c) / 2
-      a = distance vertex1 vertex2
-      b = distance vertex2 vertex3
-      c = distance vertex1 vertex3
+triangleArea vertex1 vertex2 vertex3 = sqrt(s * (s - a) * (s - b) * (s - c))
+  where
+    s = (a + b + c) / 2
+    a = distance vertex1 vertex2
+    b = distance vertex2 vertex3
+    c = distance vertex1 vertex3
 
 -- Q5
 isPrime :: Int -> Bool
@@ -47,14 +46,14 @@ choose n r
 -- Q9
 remainder :: Int -> Int -> Int
 remainder dividend divisor 
-  | dividend < divisor    = dividend
-  | otherwise             = remainder (dividend - divisor) divisor
+  | dividend < divisor = dividend
+  | otherwise          = remainder (dividend - divisor) divisor
 
 -- Q10
 quotient :: Int -> Int -> Int
 quotient dividend divisor
-  | dividend < divisor    = 0
-  | otherwise             = 1 + quotient (dividend - divisor) divisor
+  | dividend < divisor = 0
+  | otherwise          = 1 + quotient (dividend - divisor) divisor
 
 -- Q11
 binary :: Int -> Int
@@ -64,8 +63,8 @@ binary num
 
 baseN :: Int -> Int -> Int
 baseN num base
-  | num < base    = num
-  | otherwise     = num `mod` base + baseN (num `div` base) base * 10
+  | num < base = num
+  | otherwise  = num `mod` base + baseN (num `div` base) base * 10
 
 -- Q12
 add :: Int -> Int -> Int
@@ -93,8 +92,8 @@ concatenate num1 num2
       (quotient, remainder) = chop num2
 
 -- Complexity analysis
--- Number of multiplications:   O(# digits of num2)
--- Number of subtractions:      ?
+-- Number of multiplications: O(# digits of num2)
+-- Number of subtractions:    ?
 
 -- Q15
 fib :: Int -> Int 
