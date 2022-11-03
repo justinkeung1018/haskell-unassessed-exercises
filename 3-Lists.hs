@@ -33,21 +33,31 @@ substring1 s1 "" = False
 substring1 s1 s2@(c2:c2s) = prefix1 s1 s2 || substring1 s1 c2s
   where
     prefix1 :: String -> String -> Bool
-    prefix1 "" s2 = True
     prefix1 s1 "" = False
     prefix1 (c1:c1s) (c2:c2s) = c1 == c2 && prefix1 c1s c2s
 
-    prefix2 :: String -> String -> Bool
-    prefix2 "" s2 = True
-    prefix2 s1 "" = False
-    prefix2 s1 s2 = s1 == take (length s1) s2
-
 substring2 :: String -> String -> Bool
+substring2 "" s2 = True
 substring2 s1 "" = False
-substring2 s1 s2@(_:c2s)
+substring2 s1 s2@(c2:c2s) = prefix2 s2 || substring2 s1 c2s
+  where
+    prefix2 :: String -> Bool
+    prefix2 "" = False
+    prefix2 s2 = s1 == take (length s1) s2
+
+substring3 :: String -> String -> Bool
+substring3 s1 "" = False
+substring3 s1 s2@(_:c2s)
   | length s1 > length s2     = False
   | s1 == take (length s1) s2 = True
   | otherwise                 = substring2 s1 c2s
+
+substring4 :: String -> String -> Bool
+substring4 s1 s2 = substring4' s2
+  where
+    substring4' :: String -> Bool
+    substring4' "" = False
+    substring4' s2@(c2:c2s) = take (length s1) s2 == s1 || substring4' c2s
 
 -- Q7
 -- Pre: all three strings are of the same length
