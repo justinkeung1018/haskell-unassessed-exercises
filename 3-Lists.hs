@@ -12,9 +12,7 @@ pos n (x:xs)
 -- Q4
 twoSame :: [Int] -> Bool
 twoSame [] = False
-twoSame (x:xs)
-  | x `elem` xs = True
-  | otherwise   = twoSame xs
+twoSame (x:xs) = x `elem` xs || twoSame xs
 
 -- Q5
 rev1 :: [a] -> [a]
