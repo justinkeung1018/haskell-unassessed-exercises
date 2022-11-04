@@ -109,9 +109,9 @@ primeFactors n = primeFactors' n 2
 
 -- Q12
 hcf :: Int -> Int -> Int
-hcf a b = a `div` product (ps \\ ps')
+hcf a b = product (ps \\ (ps \\ ps'))
   where
-    ps = primeFactors a
+    ps  = primeFactors a
     ps' = primeFactors b
 
 -- Using Euclid's algorithm
@@ -123,7 +123,7 @@ hcf2 a b = hcf b (a `mod` b)
 lcm :: Int -> Int -> Int
 lcm a b = a * product (ps' \\ ps)
   where
-    ps = primeFactors a
+    ps  = primeFactors a
     ps' = primeFactors b
 
 -- 3.2 List comprehensions
