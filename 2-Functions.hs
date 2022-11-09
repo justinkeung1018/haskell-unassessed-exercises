@@ -25,11 +25,10 @@ isPrime :: Int -> Bool
 isPrime n
   | n <= 1    = False
   | n == 2    = True
-  | otherwise = not (any (divisible n) [2 .. sqrtn])
+  | otherwise = not (any divisible [2 .. sqrtn])
   where
     sqrtn = floor $ sqrt $ fromIntegral n
-    
-    divisible n n'
+    divisible n'
       = n `mod` n' == 0
 
 -- Q6
