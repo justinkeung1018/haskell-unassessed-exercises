@@ -24,7 +24,8 @@ triangleArea vertex1 vertex2 vertex3 = sqrt(s * (s - a) * (s - b) * (s - c))
 isPrime :: Int -> Bool
 isPrime n
   | n <= 1    = False
-  | otherwise = any (divisible n) [2 .. sqrtn]
+  | n == 2    = True
+  | otherwise = not (any (divisible n) [2 .. sqrtn])
   where
     sqrtn = floor $ sqrt $ fromIntegral n
     
