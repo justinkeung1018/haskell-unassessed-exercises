@@ -22,9 +22,14 @@ triangleArea vertex1 vertex2 vertex3 = sqrt(s * (s - a) * (s - b) * (s - c))
 
 -- Q5
 isPrime :: Int -> Bool
-isPrime num
-  | num <= 1  = False
-  | otherwise = null [factor | factor <- [2 .. floor(sqrt(fromIntegral num))], num `mod` factor == 0]
+isPrime n
+  | n <= 1    = False
+  | otherwise = any (divisible n) [2 .. sqrtn]
+  where
+    sqrtn = floor $ sqrt $ fromIntegral n
+    
+    divisible n n'
+      = n `mod` n' == 0
 
 -- Q6
 fact :: Int -> Int
