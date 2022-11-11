@@ -127,10 +127,59 @@ lcm a b = a * product (ps' \\ ps)
     ps' = primeFactors b
 
 -- 3.2 List comprehensions
+-- Q1
+findAll key t = [y | (x, y) <- t, x == key]
+
+-- Q2
+remove :: Eq a => a -> [(a, b)] -> [(a, b)] 
+remove k ps = [p | p@(k', _) <- ps, k' /= k]
+
+remove' :: Eq a => a -> [(a, b)] -> [(a, b)]
+remove' k = filter ((k /=) . fst)
+
 -- Q3
 quicksort :: [Int] -> [Int]
 quicksort [] = []
-quicksort (pivot:rest) = quicksort smaller ++ [pivot] ++ quicksort larger
+quicksort (pivot : rest) = quicksort l ++ [pivot] ++ quicksort r
   where
-    smaller = [element | element <- rest, element <= pivot]
-    larger = [element | element <- rest, element > pivot]
+    l = [n | n <- rest, n <= pivot]
+    r = [n | n <- rest, n > pivot]
+
+-- Q4
+allSplits :: [a] -> [([a], [a])]
+allSplits xs = [splitAt i xs | i <- [1 .. length xs - 1]]
+
+-- Q5
+prefixes :: [t] -> [[t]]
+prefixes ls = [take n ls | n <- [1 .. length ls]]
+
+-- Q6
+substrings :: String -> [String]
+substrings s 
+  = [take n (drop m s) | m <- [0 .. length s - 1], n <- [1 .. length s - m]]
+
+substrings' :: String -> [String]
+substrings' "" = []
+substrings' s@(c : cs) = prefixes s ++ substrings' cs
+
+-- Q7
+perms :: Eq a => [a] -> [[a]]
+perms [] = []
+perms [x] = [[x]]
+perms ls = [x : perm | x <- ls, perm <- perms (ls \\ [x])]
+
+-- Q8
+routes :: Int -> Int -> [(Int, Int)] -> [[Int]]
+routes st end nds = routes' st end nds []
+  where
+    routes' st end nds ls
+      | (st, end) `elem` ls  = []
+      | (st, end) `elem` nds = [st, end] : rts
+      | otherwise            = rts
+      where
+        rts = [st : rt | nd@(st', end') <- filter start nds, 
+                         nd `notElem` ls,
+                         rt <- routes' end' end nds (nd : ls)
+                         ]
+        start = (st ==) . fst
+    
