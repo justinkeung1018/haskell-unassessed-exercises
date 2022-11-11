@@ -39,7 +39,7 @@ factorials = scanl (*) 1 [2..]
 
 -- (b)
 e :: Float
-e =  sum (take 5 (map (1 /) (scanl (*) 1 [1..])))
+e = sum (take 5 (map (1 /) (scanl (*) 1 [1..])))
 
 -- Q4
 squash1 :: (a -> a -> b) -> [a] -> [b]
